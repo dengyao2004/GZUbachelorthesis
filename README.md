@@ -8,7 +8,7 @@
 
 本模板不是贵州大学官方层面发布的指定模板，使用本模板前请务必核对学校官方在该年的具体格式要求，并与自己的导师交流，确认无误后才可应用。本项目开源，采用[LaTeX项目公共许可证 v1.3c](https://www.latex-project.org/lppl/lppl-1-3c/)授权协议，若因使用本模板引起纠纷，模板的所有制作者概不负责。
 
-**强烈建议具备一定 \LaTeX 使用经验后再来使用本模板。**
+**强烈建议具备一定 LaTeX 使用经验后再来使用本模板。**
 
 本项目分发的 `GZUlogo1.png` 与 `GZUlogo2.png` 为载有贵州大学校徽与校名的图形文件，用于制作论文封面及页眉。请注意：相关图形与文字都是贵州大学的注册商标，除此模板外，请勿用于任何其他用途。
 
@@ -33,10 +33,6 @@ This template is not officially released by Guizhou University. Before using it,
 **It is strongly suggested that users acquire prior experience with LaTeX before utilizing this template.**
 
 The distributed `GZUlogo1.png` and `GZUlogo1.png` files in this project contain the graphical emblem and name of Guizhou University, and are used for creating undergraduate thesis covers only. Both the relevant graphics and text are registered trademarks of Guizhou University. You must not use them for any other purposes except within this template.
-
-
-* Template usage documentation (`thuthesis.pdf`)
-* Template example (`thuthesis-example.pdf`)
 
 Place the following files in the same directory. After compiling with xelatex -> bibtex -> xelatex -> xelatex, you would obtain the template usage example `example.pdf`:
 
