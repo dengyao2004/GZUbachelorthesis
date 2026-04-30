@@ -1,0 +1,4 @@
+\beamer@sectionintoc {1}{研究背景与意义}{3}{0}{1}
+\beamer@sectionintoc {2}{国内外现状与发展趋势}{5}{0}{2}
+\beamer@sectionintoc {3}{核心内容、关键问题与思路}{6}{0}{3}
+\beamer@sectionintoc {4}{进度安排}{9}{0}{4}

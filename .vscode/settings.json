@@ -1,0 +1,70 @@
+{
+    "latex-workshop.view.pdf.viewer": "tab",
+    "latex-workshop.view.pdf.tab.useNewGroup": true,
+    "latex-workshop.view.pdf.tab.editorGroup": "right",
+    "workbench.editor.openSideBySideDirection": "right",
+    "workbench.editor.revealIfOpen": true,
+
+    "latex-workshop.latex.autoBuild.run": "onSave",
+    "latex-workshop.latex.recipe.default": "latexmk (xelatex)",
+
+    "latex-workshop.synctex.afterBuild.enabled": true,
+    "latex-workshop.synctex.synctexjs.enabled": true,
+
+    "latex-workshop.latex.recipes": [
+        {
+            "name": "latexmk (xelatex)",
+            "tools": ["latexmk"]
+        },
+        {
+            "name": "xelatex only",
+            "tools": ["xelatex"]
+        }
+    ],
+
+    "latex-workshop.latex.tools": [
+        {
+            "name": "latexmk",
+            "command": "latexmk",
+            "args": [
+                "-f",
+                "-xelatex",
+                "-synctex=1",
+                "-interaction=nonstopmode",
+                "-file-line-error",
+                "%DOC%"
+            ]
+        },
+        {
+            "name": "xelatex",
+            "command": "xelatex",
+            "args": [
+                "-synctex=1",
+                "-interaction=nonstopmode",
+                "-file-line-error",
+                "%DOC%"
+            ]
+        }
+    ],
+
+    "latex-workshop.latex.autoClean.run": "never",
+    "latex-workshop.latex.clean.fileTypes": [
+        "*.aux", "*.bbl", "*.blg", "*.idx", "*.ind",
+        "*.lof", "*.lot", "*.out", "*.toc", "*.acn",
+        "*.acr", "*.alg", "*.glg", "*.glo", "*.gls",
+        "*.ist", "*.fls", "*.log", "*.fdb_latexmk"
+    ],
+
+    "latex-workshop.intellisense.package.enabled": true,
+    "latex-workshop.message.error.show": true,
+    "latex-workshop.message.warning.show": false,
+    "python.testing.unittestArgs": [
+        "-v",
+        "-s",
+        "./out",
+        "-p",
+        "*_test.py"
+    ],
+    "python.testing.pytestEnabled": false,
+    "python.testing.unittestEnabled": true
+}

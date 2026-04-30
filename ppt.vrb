@@ -1,0 +1,32 @@
+\frametitle{研究思路与技术路线}
+\centering
+^^I^^I\begin{tikzpicture}[ampersand replacement=\&]
+^^I^^I^^I% 1. 使用矩阵排版节点，增加列间距和行间距
+^^I^^I^^I\matrix (m) [matrix of nodes, row sep=1.0cm, column sep=1.5cm, nodesInEmptyCells] {
+^^I^^I^^I^^I|[node_style]| {奇 异 两 点\\边 值 问 题} \& |[node_style]| {Riccati\\方 程} \& |[node_style]| {时 间 不 一 致\\LQ 问 题} \\
+^^I^^I^^I^^I|[node_style]| {原 问 题 解\\存 在 唯 一 性} \& |[node_style]| {Riccati 解 的\\存 在 唯 一 性} \& |[node_style]| {LQ 问 题\\可 解 性 分 析} \\
+^^I^^I^^I};
+^^I^^I^^I
+^^I^^I^^I% 2. 绘制顶部起始小箭头 (截图中的灰色向下箭头)
+^^I^^I^^I\draw [dashed, gray!60, line width=1.2pt, -{Stealth[scale=1.0]}] ($(m-1-1.north)+(0,0.5)$)-| (m-1-1.north);
+^^I^^I^^I
+^^I^^I^^I% 3. 绘制第一行箭头及标签
+^^I^^I^^I\draw [arrow_style] (m-1-1) -- (m-1-2) node[midway, above, label_style] {解耦转化};
+^^I^^I^^I\draw [arrow_style] (m-1-2) -- (m-1-3) node[midway, above, label_style] {等价转换};
+^^I^^I^^I
+^^I^^I^^I% 4. 绘制垂直向下箭头
+^^I^^I^^I\draw [arrow_style] (m-1-3) -- (m-2-3) node[midway, right, label_style] {理论分析};
+^^I^^I^^I
+^^I^^I^^I% 5. 绘制第二行向左箭头及标签
+^^I^^I^^I\draw [arrow_style] (m-2-3) -- (m-2-2) node[midway, above, label_style] {导出};
+^^I^^I^^I\draw [arrow_style] (m-2-2) -- (m-2-1) node[midway, above, label_style] {传递};
+^^I^^I^^I
+^^I^^I^^I% 6. 绘制左侧虚线 (还原截图中的连接线)
+^^I^^I^^I\draw [dashed, gray!60, line width=1.2pt] (m-1-1) -- (m-2-1);
+^^I^^I^^I
+^^I^^I\end{tikzpicture}
+^^I^^I
+^^I^^I\vspace{0.4cm}
+^^I^^I\begin{block}{核心解耦技巧}
+^^I^^I^^I引入辅助函数 $P$，证明其即为 \textbf{Riccati 方程}的解。将难以直接处理的边值问题转化为对 Riccati 方程和 LQ 问题的研究，有效降低求解难度。
+^^I^^I\end{block}

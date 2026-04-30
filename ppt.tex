@@ -1,0 +1,224 @@
+\documentclass[aspectratio=169, 10pt]{ctexbeamer}
+
+% ==================== 主题与颜色设置 ====================
+\usetheme{Madrid} % 经典学术主题结构
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows.meta, positioning, shadows}
+
+% 将样式定义提到 document 外面，全局生效
+\tikzset{
+	box/.style={
+		rectangle, rounded corners=4pt, draw=none, 
+		fill=#1, text=white, align=center, 
+		minimum width=3.5cm, minimum height=1.5cm,
+		drop shadow={opacity=0.3}
+	},
+	arrow/.style={-{Stealth[scale=1.2]}, line width=1.5pt, draw=gray!60}
+}
+
+% 定义一种经典、深邃的“学术蓝”
+\definecolor{AcademicBlue}{RGB}{0, 75, 143} 
+\definecolor{LightBlue}{RGB}{235, 243, 250}
+
+% 将整个 PPT 的主色调替换为学术蓝
+\usecolortheme[named=AcademicBlue]{structure} 
+
+% 自定义 Block (文本框) 的颜色，使其呈现漂亮的蓝色渐变/层次
+\setbeamercolor{block title}{bg=AcademicBlue, fg=white}
+\setbeamercolor{block body}{bg=LightBlue, fg=black}
+\setbeamercolor{block title example}{bg=AcademicBlue!80!black, fg=white}
+\setbeamercolor{block body example}{bg=LightBlue, fg=black}
+\setbeamercolor{block title alerted}{bg=red!75!black, fg=white} % 保留一点红色作为强调对比
+\setbeamercolor{block body alerted}{bg=red!5, fg=black}
+
+\usefonttheme{professionalfonts} 
+
+% 去除底部的多余导航符号，保持画面整洁
+\setbeamertemplate{navigation symbols}{}
+% 修改列表符号为小圆点，并统一为学术蓝
+\setbeamertemplate{itemize items}[circle]
+\setbeamercolor{itemize item}{fg=AcademicBlue}
+\setbeamercolor{itemize subitem}{fg=AcademicBlue}
+\setbeamertemplate{enumerate items}[default]
+
+% ==================== 宏包 ====================
+\usepackage{amsmath, amsfonts, amssymb, amsthm}
+\usepackage{booktabs}
+\usepackage{graphicx}
+
+% ==================== 首页信息 ====================
+\title[开题报告：奇异两点边值问题]{奇异两点边值问题解的存在性和唯一性}
+\subtitle{贵州大学本科生毕业论文（设计）开题答辩}
+\author[邓垚]{报告人：邓垚 \\ \vspace{0.2cm} 指导教师：彭云飞 \quad 教授}
+\institute[贵州大学]{贵州大学 \quad 数学与统计学院 \quad 应数2201班}
+\date{\today}
+
+\begin{document}
+	
+	% --- 幻灯片：封面 ---
+	\begin{frame}
+		\titlepage
+	\end{frame}
+	
+	% --- 幻灯片：目录 ---
+	\begin{frame}{汇报提纲}
+		\tableofcontents[hideallsubsections]
+	\end{frame}
+	
+	% ==================== 第一部分 ====================
+	\section{研究背景与意义}
+	
+	\begin{frame}{研究背景与目的}
+		\begin{block}{核心背景：时间不一致问题 (Time-Inconsistent Problems)}
+			在最优控制与微分对策理论中，时间不一致性会导致经典的\textbf{贝尔曼最优性原理失效}。传统的最优控制问题必须转化为寻找“子博弈完美纳什均衡策略”。
+		\end{block}
+		
+		\vspace{0.3cm}
+		\textbf{\textcolor{AcademicBlue}{研究目的：}}
+		\begin{itemize}
+			\item \textbf{理论剖析：} 在时间不一致框架下，探究该类奇异两点边值问题与普通奇异两点边值问题在\textbf{解的存在唯一性}上的本质差别。
+			\item \textbf{等价关系：} 利用\textbf{奇异两点边值问题} 、 \textbf{Riccati 方程}与 \textbf{LQ 问题} 之间的等价关系，严格证明解的存在性与唯一性。
+			\item \textbf{数值实现：} 针对一维情形，构造轻量级迭代算法求取数值解，提供直观的计算支撑。
+		\end{itemize}
+	\end{frame}
+	
+	\begin{frame}{研究意义}
+		\begin{columns}
+			\column{0.5\textwidth}
+			\begin{exampleblock}{理论意义 (Theoretical)}
+				\begin{itemize}
+					\item 学术界对两点边值问题高度关注，但在奇异两点边值问题的研究深度仍有局限。
+					\item 本文聚焦该特定框架，系统探讨存在唯一性，旨在弥补当前非标准边界条件研究的不足，为控制论与常微分方程理论提供参考。
+				\end{itemize}
+			\end{exampleblock}
+			
+			\column{0.5\textwidth}
+			\begin{block}{实际意义 (Practical)}
+				\begin{itemize}
+					\item 时间不一致性是金融与经济学（如政策承诺与执行的矛盾）中的经典难题。
+					\item 通过建立系统的数学分析框架并给出数值解法，为金融经济学中的动态决策和均衡策略制定提供坚实的数学工具。
+				\end{itemize}
+			\end{block}
+		\end{columns}
+	\end{frame}
+	
+	% ==================== 第二部分 ====================
+	\section{国内外现状与发展趋势}
+	
+	\begin{frame}{国内外研究现状}
+		该领域属于当前国际控制论与应用数学界最前沿且极具挑战的核心难题之一：
+		
+		\vspace{0.3cm}
+		\begin{itemize}
+			\item \textbf{\textcolor{AcademicBlue}{历史启蒙：}} Strotz (1955) 在经济学中提出时间不一致概念；Pardoux \& Peng (1990) 的倒向随机微分方程(BSDE)理论奠定基础。
+			\item \textbf{\textcolor{AcademicBlue}{划时代突破：}} 雍炯敏 (2012) 揭示了时间不一致 LQ 问题的均衡条件导出的是\textbf{非标准的 Riccati 微分方程}。
+			\item \textbf{\textcolor{AcademicBlue}{近期进展：}} 
+			\begin{itemize}
+				\item Wei, Yong, Yu (2017) 证明了广义 Riccati 边值方程全局解的存在唯一性。
+				\item 吴臻团队、李娟团队推广了“解耦场”理论，利用“弱单调性条件”处理非局部生成元的非标准 FBSDEs。
+			\end{itemize}
+		\end{itemize}
+	\end{frame}
+	
+	
+	% ==================== 第三部分 ====================
+	\section{核心内容、关键问题与思路}
+	\begin{frame}{主要研究内容与关键问题}
+		\textbf{问题:}
+		\begin{equation*}
+			{\footnotesize
+			\left\{
+			\begin{aligned}
+				&\begin{aligned}
+					\dot{\bar{X}}(s) ={} & \left[A(s)-B(s)M^{-1}(s,s)S(s,s)\right]\bar{X}(s) \\
+					& -B(s)M^{-1}(s,s)B^\top(s)\varphi(s),
+				\end{aligned}
+				&& s\in(t,T], \\[8pt]
+				&\begin{aligned}
+					\dot{\varphi}(s) ={} & -\left[A(s)-B(s)M^{-1}(s,s)S(s,s)\right]^{T}\varphi(s) \\
+					& -\left[\hat{Q}(s,s)-S^\top(s,s)M^{-1}(s,s)S(s,s)\right]\bar{X}(s),
+				\end{aligned}
+				&& s\in[t,T), \\[8pt]
+				&\bar{X}(t) = x, \varphi(T) = G(T)\bar{X}(T).
+			\end{aligned}
+			\right.
+			}
+		\end{equation*}
+		其中，${\forall s\in[t,T],\forall x\in\mathbb{R}^n,T>0,}$
+		\begin{equation*}
+			{\footnotesize
+				\begin{aligned}
+					&\left\langle\hat{Q}(s,s)\bar{X}(s),\bar{X}(s)\right\rangle \\
+					= &\left\langle Q(s,s)\bar{X}(s),\bar{X}(s)\right\rangle - \left\langle \dot{G}(s)\bar{X}(T),\bar{X}(T) \right\rangle -\int_{s}^{T}\left\langle Q_s(s,\tau)\bar{X}(\tau),\bar{X}(\tau) \right\rangle d\tau \\
+					&-\int_{s}^{T}\Bigl\langle M_s(s,\tau)M^{-1}(\tau,\tau)\left(B^\top(\tau)\varphi(\tau)+S(\tau,\tau)\bar{X}(\tau)\right)-2S_s(s,\tau)\bar{X}(\tau), \\
+					& M^{-1}(\tau,\tau)\left(B^\top(\tau)\varphi(\tau)+S(\tau,\tau)\bar{X}(\tau)\right)\Bigr\rangle d\tau.
+			\end{aligned}}
+		\end{equation*}
+	\end{frame}
+	\begin{frame}{主要研究内容与关键问题}
+		\textbf{\textcolor{red!80!black}{关键难点：}} 奇异两点边值问题本身具有\textbf{高度非线性特征}，且常规问题的解通常不唯一。传统方法难以直接奏效。
+		
+		\vspace{0.5cm}
+		\textbf{\textcolor{AcademicBlue}{研究内容分解：}}
+		\begin{enumerate}
+			\item \textbf{问题转化：} 证明奇异两点边值问题、Riccati 方程以及 LQ 问题三者的\textbf{等价性}。
+			\item \textbf{存在唯一性证明：} 
+			\begin{itemize}
+				\item LQ 问题的可解性 $\Longrightarrow$ Riccati 方程解的存在性 $\Longrightarrow$ 边值问题解的存在性。
+				\item Riccati 解的唯一性质 $\Longrightarrow$ 边值问题解的唯一性。
+			\end{itemize}
+			\item \textbf{数值实验：} 针对一维问题，基于 Python 编写迭代算法进行数值求解与验证。
+		\end{enumerate}
+	\end{frame}
+	
+	\begin{frame}{研究技术路线}
+		\centering
+		\begin{tikzpicture}[xscale=1.2, yscale=1] % 使用 xscale 统一拉伸水平轴
+			
+			% 节点定义：间距从 4.5 调整为 6.0，让布局更开阔
+			\node[box=blue!70!black, font=\small] (P) at (0,0) {\textbf{问题域}\\时间不一致难题\\奇异两点边值问题};
+			\node[box=teal!70!black, font=\small] (T) at (4.75,0) {\textbf{转化域}\\解耦策略 (P函数)\\Riccati \& LQ 等价映射};
+			\node[box=orange!70!black, font=\small] (R) at (9.54,0) {\textbf{解决域}\\理论分析 (唯一性)\\数值迭代算法};
+			
+			% 连线：由于节点变远了，箭头也会自动随之拉长
+			\draw[arrow] (P) -- (T) node[midway, above, font=\scriptsize, text=gray, yshift=2pt] {等价转化};
+			\draw[arrow] (T) -- (R) node[midway, above, font=\scriptsize, text=gray, yshift=2pt] {验证支撑};
+			
+		\end{tikzpicture}
+		
+		\vspace{1.2cm} % 增加图表下方的留白，让页面更有呼吸感
+		\begin{itemize}
+			\item \textbf{问题驱动：} 针对非线性边值问题存在的非唯一性与非局部性挑战。
+			\item \textbf{闭环验证：} 理论证明与数值仿真相结合，确保结论的可靠性。
+		\end{itemize}
+	\end{frame}
+	
+	% ==================== 第四部分 ====================
+	\section{进度安排}
+	
+	\begin{frame}{进度计划}
+		\begin{table}[]
+			\centering
+			\renewcommand{\arraystretch}{1.5}
+			\begin{tabular}{cp{0.75\textwidth}}
+				\toprule
+				\textbf{\textcolor{AcademicBlue}{时间节点}} & \textbf{\textcolor{AcademicBlue}{主要工作内容}} \\
+				\midrule
+				\textbf{3月下旬} & 集中完成理论推导，建立 两点边值问题、Riccati 与 LQ 问题的等价关系，论证解的存在唯一性。 \\
+				\textbf{4月} & 开展数值实现，设计 Python 迭代算法，进行边界条件下的数值实验并分析收敛性；撰写论文初稿。 \\
+				\textbf{5月上旬} & 优化数值结果，完善理论表述的逻辑衔接；论文定稿，制作答辩 PPT，准备正式答辩。 \\
+				\bottomrule
+			\end{tabular}
+		\end{table}
+	\end{frame}
+	
+	% --- 幻灯片：致谢 ---
+	\begin{frame}[plain]
+		\begin{center}
+			\Huge{\textbf{\textcolor{AcademicBlue}{恳请各位老师批评指正！}}} \\
+			\vspace{1cm}
+			\Large{谢谢！}
+		\end{center}
+	\end{frame}
+	
+\end{document}

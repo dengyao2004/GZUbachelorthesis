@@ -1,0 +1,94 @@
+\begin{thebibliography}{16}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{#1}
+\expandafter\ifx\csname urlstyle\endcsname\relax\else
+  \urlstyle{same}\fi
+\expandafter\ifx\csname href\endcsname\relax
+  \DeclareUrlCommand\doi{\urlstyle{rm}}
+  \def\eprint#1#2{#2}
+\else
+  \def\doi#1{\href{https://doi.org/#1}{\nolinkurl{#1}}}
+  \let\eprint\href
+\fi
+
+\bibitem[Keller(2018)]{keller2018numerical}
+KELLER H~B.
+\newblock Numerical methods for two-point boundary-value problems\allowbreak[M].
+\newblock Courier Dover Publications, 2018.
+
+\bibitem[Agarwal et~al.(2003)Agarwal and O'Regan]{agarwal2003singular}
+AGARWAL R~P, O'REGAN D.
+\newblock Singular differential and integral equations with applications\allowbreak[M].
+\newblock Springer Science \& Business Media, 2003.
+
+\bibitem[Strotz(1955)]{strotz1955myopia}
+STROTZ R~H.
+\newblock Myopia and inconsistency in dynamic utility maximization\allowbreak[J].
+\newblock The review of economic studies, 1955, 23\allowbreak (3): 165-180.
+
+\bibitem[Yong(2012)]{yong2012deterministic}
+YONG J.
+\newblock A deterministic linear quadratic time-inconsistent optimal control problem\allowbreak[A].
+\newblock 2012.
+
+\bibitem[O'Regan(1997)]{o1997existence}
+O'REGAN D.
+\newblock Existence theory for nonlinear ordinary differential equations: Vol. 398\allowbreak[M].
+\newblock Springer Science \& Business Media, 1997.
+
+\bibitem[Ascher et~al.(1995)Ascher, Mattheij, and Russell]{ascher1995numerical}
+ASCHER U~M, MATTHEIJ R~M, RUSSELL R~D.
+\newblock Numerical solution of boundary value problems for ordinary differential equations\allowbreak[M].
+\newblock SIAM, 1995.
+
+\bibitem[Agarwal(1986)]{agarwal1986boundary}
+AGARWAL R~P.
+\newblock Boundary value problems from higher order differential equations\allowbreak[M].
+\newblock World Scientific, 1986.
+
+\bibitem[Basak et~al.(2010)Basak and Chabakauri]{basak2010dynamic}
+BASAK S, CHABAKAURI G.
+\newblock Dynamic mean-variance asset allocation\allowbreak[J].
+\newblock The Review of Financial Studies, 2010, 23\allowbreak (8): 2970-3016.
+
+\bibitem[Bj{\"o}rk et~al.(2010)Bj{\"o}rk and Murgoci]{bjork2010general}
+BJ{\"O}RK T, MURGOCI A.
+\newblock A general theory of markovian time inconsistent stochastic control problems\allowbreak[J].
+\newblock Available at SSRN 1694759, 2010.
+
+\bibitem[Bj{\"o}rk et~al.(2014)Bj{\"o}rk, Murgoci, and Zhou]{bjork2014mean}
+BJ{\"O}RK T, MURGOCI A, ZHOU X~Y.
+\newblock Mean--variance portfolio optimization with state-dependent risk aversion\allowbreak[J].
+\newblock Mathematical Finance: An International Journal of Mathematics, Statistics and Financial Economics, 2014, 24\allowbreak (1): 1-24.
+
+\bibitem[Hu et~al.(2012)Hu, Jin, and Zhou]{hu2012time}
+HU Y, JIN H, ZHOU X~Y.
+\newblock Time-inconsistent stochastic linear--quadratic control\allowbreak[J].
+\newblock SIAM journal on Control and Optimization, 2012, 50\allowbreak (3): 1548-1572.
+
+\bibitem[Hu et~al.(2017)Hu, Jin, and Zhou]{hu2017characterization}
+HU Y, JIN H, ZHOU X~Y.
+\newblock Time-inconsistent stochastic linear-quadratic control: Characterization and uniqueness of equilibrium\allowbreak[J].
+\newblock SIAM Journal on Control and Optimization, 2017, 55\allowbreak (2): 1261-1279.
+
+\bibitem[Ma et~al.(1994)Ma, Protter, and Yong]{ma1994solving}
+MA J, PROTTER P, YONG J.
+\newblock Solving forward-backward stochastic differential equations explicitly—a four step scheme\allowbreak[J].
+\newblock Probability theory and related fields, 1994, 98\allowbreak (3): 339-359.
+
+\bibitem[Cai et~al.(2022)Cai, Chen, Peng, and Wei]{cai2022time}
+CAI H, CHEN D, PENG Y, et~al.
+\newblock On the time-inconsistent deterministic linear-quadratic control\allowbreak[J].
+\newblock SIAM Journal on Control and Optimization, 2022, 60\allowbreak (2): 968-991.
+
+\bibitem[Raissi et~al.(2019)Raissi, Perdikaris, and Karniadakis]{raissi2019physics}
+RAISSI M, PERDIKARIS P, KARNIADAKIS G~E.
+\newblock Physics-informed neural networks: A deep learning framework for solving forward and inverse problems involving nonlinear partial differential equations\allowbreak[J].
+\newblock Journal of Computational physics, 2019, 378: 686-707.
+
+\bibitem[Karniadakis et~al.(2021)Karniadakis, Kevrekidis, Lu, Perdikaris, Wang, and Yang]{karniadakis2021physics}
+KARNIADAKIS G~E, KEVREKIDIS I~G, LU L, et~al.
+\newblock Physics-informed machine learning\allowbreak[J].
+\newblock Nature Reviews Physics, 2021, 3\allowbreak (6): 422-440.
+
+\end{thebibliography}

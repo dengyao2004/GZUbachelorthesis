@@ -2,6 +2,8 @@
 \ProvidesClass{GZUbachelorthesis}[2025/02/18 v1.1]
 
 
+
+
 %% Class Options
 \newif{\if@nogbt}{\@nogbtfalse}
 \DeclareOption{draft}{\PassOptionsToClass{\CurrentOption}{graphicx}}
@@ -14,7 +16,7 @@
 
 %% Loading Classes
 % 面向中文排版的ctexart文档类
-\LoadClass[a4paper,oneside,zihao=-4,scheme=chinese,fancyhdr,hyperref]{ctexart}[2022/07/14 v2.5.10]
+\LoadClass[a4paper,oneside,zihao=-4,scheme=chinese,fancyhdr=windows,hyperref]{ctexart}[2022/07/14 v2.5.10]
   \ctexset{
     today = small,
     punct = kaiming,
@@ -25,6 +27,11 @@
   }
 
 %% Loading Packages
+% 设置英文和数字字体为 Times New Roman
+\RequirePackage{fontspec}
+\setmainfont{Times New Roman}
+\setCJKfamilyfont{heiti}{SimHei}[AutoFakeBold=2.0]
+\defaultfontfeatures[SimHei,STHeiti,WenQuanYi Micro Hei]{BoldFont={*},AutoFakeBold=2.0}
 % 确保使用xelatex来进行编译
 \RequirePackage{iftex}
 \ifxetex
@@ -40,6 +47,7 @@
 \RequirePackage{amssymb}
 \RequirePackage{amsfonts}
 \RequirePackage{mathtools}
+\RequirePackage{amsthm}
 
 % 脚注
 \RequirePackage{pifont}
@@ -56,8 +64,8 @@
 \pagestyle{fancy}
   \fancyhf{}
   \lhead{\hspace{5ex}\includegraphics[height=1.22cm]{GZUlogo1.png}}
-  \chead{\zihao{5}\heiti 贵州大学本科毕业论文（设计）}
-  \cfoot{\zihao{5} 第 \thepage 页}
+  \chead{\zihao{-4}\heiti 贵州大学本科毕业论文（设计）}
+  \rhead{\zihao{5}\songti 第 \thepage 页\hspace{5ex}}
 
 
 % 插入图表
@@ -107,8 +115,12 @@
 % 交叉引用
 \hypersetup{colorlinks=true,linkcolor=blue,citecolor=red} %超链接颜色
 \RequirePackage{tocloft} %目录设置
+  % 修改目录标题为带空格的“目 录”
+  \renewcommand{\contentsname}{目\hspace{1em}录}
   \renewcommand\cfttoctitlefont{\thispagestyle{fancy}\hfill\heiti\zihao{3}}
   \renewcommand\cftaftertoctitle{\hfill}
+  \setlength{\cftbeforetoctitleskip}{10pt} % 修改：段前0.5行间距（1.5倍行距下约10pt）
+  \setlength{\cftaftertoctitleskip}{10pt}  % 修改：段后0.5行间距
   \renewcommand\cftsecfont{\zihao{-4}}
     \setlength{\cftbeforesecskip}{0pt}
     \renewcommand\cftsecpagefont{}
@@ -118,7 +130,7 @@
   \renewcommand\cftsubsubsecfont{\zihao{-4}}
     \setlength{\cftbeforesubsubsecskip}{0pt}
     \renewcommand\cftsubsubsecpagefont{}
-  \renewcommand\cftdotsep{\cftnodots}
+  \renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
 
 \RequirePackage[sort&compress]{gbt7714}
   \bibliographystyle{gbt7714-numerical} %使用顺序编码制
@@ -176,8 +188,6 @@
   \studentID{#1}}
 \define@key{titlepage}{author}[]{%
   \author{#1}}
-\define@key{titlepage}{author*}[]{%
-  \enauthor{#1}}
 \define@key{titlepage}{teacher}[]{%
   \teacher{#1}}
 \define@key{titlepage}{date}[\qquad 年\quad 月\quad 日]{%
@@ -195,15 +205,16 @@
     \includegraphics[height=2.77cm]{GZUlogo2.png}
 	\end{figure}
 	\begin{center}
-		\heiti{\zihao{2}{本科毕业论文（设计）}}\normalfont
+		{\heiti\bfseries\zihao{2}{本科毕业论文（设计）}\color{black}}\normalfont
 		\vskip 72pt
-    \textbf{\zihao{3}{\@title \vskip 12pt \@entitle}}
+    {\heiti\bfseries\zihao{3}\color{black}\@title\par}
+    \vskip 24pt
     \vskip 96pt
 		\begin{table}[h]
 			\centering
-			\begin{tabular}{>{\heiti \zihao{3}}p{2.5cm} >{\centering\arraybackslash\zihao{3}}p{7cm}}
+			\begin{tabular}{>{\heiti\bfseries \zihao{3}}p{2.5cm} >{\heiti\bfseries\centering\arraybackslash\zihao{3}}p{7cm}}
 				学 \hspace{3.5ex} 院: & \GZU@tokens@department \\ \cline{2-2} \\
-				专 \hspace{3.5ex} 业: & {\GZU@tokens@major}（{\GZU@tokens@majorcode}） \\ \cline{2-2} \\
+				专 \hspace{3.5ex} 业: & {\GZU@tokens@major} \\ \cline{2-2} \\
         班 \hspace{3.5ex} 级: & \GZU@tokens@class \\ \cline{2-2} \\
 				学 \hspace{3.5ex} 号: & \GZU@tokens@studentID \\ \cline{2-2} \\
         学生姓名: & \@author \\ \cline{2-2} \\
@@ -211,60 +222,97 @@
 			\end{tabular}
 		\end{table}
 		\vskip 33pt
-		\songti{\zihao{3}{\@date}}
+		{\songti\zihao{3}{\@date}}
 	\end{center}
   \newpage
 
   \thispagestyle{empty}
   \begin{center}
     \vspace*{48pt}
-    \heiti{\zihao{3}{贵州大学本科毕业论文（设计）\\诚信责任书}}
+    {\heiti\bfseries\zihao{3}{贵州大学本科毕业论文（设计）\\诚信责任书}}
     \vskip 24pt
   \end{center}
 
-  \zihao{4}本人郑重声明：本人所呈交的毕业论文（设计），是在导师的指导下独立进行研究所完成。毕业论文（设计）中凡引用他人已经发表或未发表的成果、数据、观点等，均已明确注明出处。
-
-  特此声明.
+    {\songti\zihao{4}本人郑重声明：本人所呈交的毕业论文（设计），是在导师的指导下独立进行研究所完成。毕业论文（设计）中凡引用他人已经发表或未发表的成果、数据、观点等，均已明确注明出处。
+  
+  }
+\vskip 3pt
+  {\songti\zihao{4}特此声明。}
   \vskip 42pt
   \begin{flushright}
-    论文（设计）作者签名：\rule{10ex}{0.4pt} \vskip 21pt 日 \hspace{1.75ex} 期：\rule{10ex}{0.4pt}
+    {\songti\zihao{4}论文（设计）作者签名：\rule{12ex}{0.4pt} \vskip 21pt 日 \hspace{1.75ex} 期：\rule{18ex}{0.4pt}}
   \end{flushright}
   \newpage \normalsize \restoregeometry
 
-  \thispagestyle{empty}
-  \vspace*{\fill}
-  \begin{center}
-    \zihao{-2}\@title \\ \@entitle \vskip 36pt \@author \\ \@enauthor
-  \end{center}
-  \vspace*{\fill}
+
   \newpage \normalsize
 }
 
+
 \newenvironment{tocabstract}{%
   \pagenumbering{Roman}%
+  \pagestyle{fancy}
+  \fancyhf{}
+  \lhead{\hspace{5ex}\includegraphics[height=1.22cm]{GZUlogo1.png}}
+  \chead{\zihao{-4}\heiti 贵州大学本科毕业论文（设计）}
+  \cfoot{\zihao{5}\songti 第 \thepage 页} % 仅此部分显示页脚
   \tableofcontents%
   \newpage
   }{%
   \newpage\pagenumbering{arabic}%
   }
 
+
 \renewenvironment{abstract}[1][\empty]{%
-  \newcommand\GZU@keywords{\bfseries \paragraph{\zihao{-3}关键词：}#1 \mdseries}%
-  \newpage\phantomsection\addcontentsline{toc}{section}{摘要}%
-  \begin{center}%\zihao{-2}\vspace*{1pt}\textbf{\@title}\\ \vspace*{12pt}%
-  \zihao{3}\textbf{摘要}\end{center}\par
-  }{%
-  \GZU@keywords
-  }
+  \gdef\GZU@zhkeywords{#1}% 将关键词存入全局宏，供结尾调用
+  \clearpage
+  \phantomsection\addcontentsline{toc}{section}{摘要}%
+  
+  % 1. 论文题目：黑体小二，居中，上空一行
+  \vspace*{\baselineskip}
+  {\centering\heiti\zihao{-2}\@title\par}
+  
+  % 2. “摘要”二字：黑体小三，居中，段前段后0.5行
+  \vspace{0.5\baselineskip}
+  {\centering\heiti\zihao{-3}\bfseries 摘\hspace{1em}要\par}
+  \vspace{0.5\baselineskip}
+  
+  % 3. 摘要正文：宋体小四（全局已是1.5倍行距，无需重复设置）
+  \songti\zihao{-4}
+  \ignorespaces
+}{%
+  % 4. 关键词：标签黑体小四，内容宋体小四
+  \par
+  \vspace{1em}
+  \noindent{\heiti\zihao{-3}关键词：}{\songti\zihao{-4}\GZU@zhkeywords}\par
+  \clearpage
+}
 
 \newenvironment{enabstract}[1][\empty]{%
-  \newcommand\GZU@enkeywords{\bfseries \paragraph{\zihao{-3}Key words:}#1 \mdseries}%
-  \newpage\phantomsection\addcontentsline{toc}{section}{Abstract}%
-  \begin{center}%\zihao{-2}\vspace*{1pt}\textbf{\@entitle}\\ \vspace*{12pt}%
-  \zihao{3}\zihao{3}\textbf{Abstract}\end{center}\par
-  }{%
-  \GZU@enkeywords
-  }
+  \gdef\GZU@enkeywords{#1}%
+  \clearpage
+  \phantomsection\addcontentsline{toc}{section}{Abstract}%
+  
+  % 1. 英文题目：TNR 小二，居中，上空一行
+  \vspace*{\baselineskip}
+  {\centering\rmfamily\zihao{-2}\bfseries\@entitle\par}
+  
+  % 2. Abstract：TNR 小三，居中，段前段后0.5行
+  \vspace{0.5\baselineskip}
+  {\centering\rmfamily\zihao{-3}\bfseries Abstract\par}
+  \vspace{0.5\baselineskip}
+  
+  % 3. 英文正文：TNR 小四（全局已是1.5倍行距，无需重复设置）
+  \rmfamily\zihao{-4}
+  \ignorespaces
+}{%
+  % 4. Keywords：标签 TNR 小四加粗，内容 TNR 小四
+  \par
+  \vspace{1em}
+  \noindent{\rmfamily\zihao{-3} Keywords: }{\rmfamily\zihao{-4}\GZU@enkeywords}\par
+  \clearpage
+}
+
 
 \let\@oldbibliography=\bibliography
 \renewcommand\bibliography[1]{%
@@ -288,10 +336,18 @@
   \section*{附录}%
   }
 % 定理环境
-\newtheorem{thm}{定理}
-\newtheorem{lem}{引理}
-\newenvironment{proof}
-  {\paragraph{证明}}
-  {\ensuremath{\hfill \square} \par \vskip 1em}
-
+\newtheoremstyle{style}{}{}{}{\parindent}{\bfseries}{.}{.5em}{}
+\theoremstyle{style}
+\newtheorem{thm}{定理}[subsection]
+\newtheorem{lem}{引理}[subsection]
+%\newenvironment{proof}
+% {\paragraph{证明}}
+% {\ensuremath{\hfill \square} \par \vskip 1em}
+\renewcommand{\proofname}{\bf 证明}  % 将证明标题改为中文
+\renewenvironment{proof}[1][\proofname]{\par
+	\pushQED{\qed}%
+	\normalfont \topsep6\p@\@plus6\p@\relax
+	\trivlist
+	\item[\hskip\labelsep\bfseries #1\@addpunct{.}]\ignorespaces
+}{\popQED\endtrivlist\@endpefalse}
 \endinput
