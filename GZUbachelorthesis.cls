@@ -5,6 +5,7 @@
 
 
 %% Class Options
+\newif{\if@showtitlepage}{\@showtitlepagefalse} % 标题页的开关
 \newif{\if@nogbt}{\@nogbtfalse}
 \DeclareOption{draft}{\PassOptionsToClass{\CurrentOption}{graphicx}}
 \DeclareOption*{
@@ -13,6 +14,7 @@
   }
 \ProcessOptions\relax
 
+% \@showtitlepagetrue % 开启独立标签页（取消注释）
 
 %% Loading Classes
 % 面向中文排版的ctexart文档类
@@ -25,6 +27,8 @@
     subsubsection/format = \raggedright\bfseries\zihao{-4}\hspace*{2em},
     paragraph/runin = true,
   }
+% 指定全文英文字体
+\setmainfont{Times New Roman}
 
 %% Loading Packages
 % 设置英文和数字字体为 Times New Roman
@@ -78,6 +82,10 @@
 \numberwithin{equation}{section} %公式按章节进行编号
 \numberwithin{figure}{section} %图片按章节进行编号
 \numberwithin{table}{section} %表格按章节进行编号
+
+\RequirePackage{caption} % 加载专门控制图表标题的宏包
+\DeclareCaptionFont{heiti}{\heiti} % 告诉 caption 宏包，中文的“黑体”命令是什么
+\captionsetup{font={small, heiti}, labelsep=quad}% 全局设置：small(对应五号字)，heiti(黑体)，labelsep=quad(图号和标题之间空一个中文字符)
 
 
 % 设置代码环境
@@ -244,8 +252,21 @@
   \end{flushright}
   \newpage \normalsize \restoregeometry
 
+<<<<<<< HEAD
 
   \newpage \normalsize
+=======
+  % 可选独立标题页（默认关闭）
+  \if@showtitlepage
+    \thispagestyle{empty}
+    \vspace*{\fill}
+    \begin{center}
+      \zihao{-2}\@title \\ \@entitle \vskip 36pt \@author \\ \@enauthor
+    \end{center}
+    \vspace*{\fill}
+    \newpage \normalsize
+  \fi
+>>>>>>> 95df24d7583700db5e7d5fa96f9f950a1fd34165
 }
 
 
@@ -264,6 +285,7 @@
 
 
 \renewenvironment{abstract}[1][\empty]{%
+<<<<<<< HEAD
   \gdef\GZU@zhkeywords{#1}% 将关键词存入全局宏，供结尾调用
   \clearpage
   \phantomsection\addcontentsline{toc}{section}{摘要}%
@@ -313,6 +335,32 @@
   \clearpage
 }
 
+=======
+  \newcommand\GZU@keywords{\bfseries \paragraph{\zihao{-3}关键词：}#1 \mdseries}%
+  \newpage\phantomsection\addcontentsline{toc}{section}{摘要}%
+  \if@showtitlepage
+    \begin{center}\zihao{3}\textbf{摘要}\end{center}\par
+  \else
+    \begin{center}\zihao{-2}\vspace*{1pt}\textbf{\@title}\\ \vspace*{12pt}%
+    \zihao{3}\textbf{摘要}\end{center}\par
+  \fi
+  }{%
+  \GZU@keywords
+  }
+
+\newenvironment{enabstract}[1][\empty]{%
+  \newcommand\GZU@enkeywords{\bfseries \paragraph{\zihao{-3}Key words:}#1 \mdseries}%
+  \newpage\phantomsection\addcontentsline{toc}{section}{Abstract}%
+  \if@showtitlepage
+    \begin{center}\zihao{3}\zihao{3}\textbf{Abstract}\end{center}\par
+  \else
+    \begin{center}\zihao{-2}\vspace*{1pt}\textbf{\@entitle}\\ \vspace*{12pt}%
+    \zihao{3}\zihao{3}\textbf{Abstract}\end{center}\par
+  \fi
+  }{%
+  \GZU@enkeywords
+  }
+>>>>>>> 95df24d7583700db5e7d5fa96f9f950a1fd34165
 
 \let\@oldbibliography=\bibliography
 \renewcommand\bibliography[1]{%
