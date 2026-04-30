@@ -4,6 +4,7 @@
 
 
 
+
 %% Class Options
 \newif{\if@showtitlepage}{\@showtitlepagefalse} % 标题页的开关
 \newif{\if@nogbt}{\@nogbtfalse}
@@ -84,7 +85,7 @@
 \numberwithin{table}{section} %表格按章节进行编号
 
 \RequirePackage{caption} % 加载专门控制图表标题的宏包
-\DeclareCaptionFont{heiti}{\heiti} % 告诉 caption 宏包，中文的“黑体”命令是什么
+\DeclareCaptionFont{heiti}{\heiti} % 告诉 caption 宏包，中文的"黑体"命令是什么
 \captionsetup{font={small, heiti}, labelsep=quad}% 全局设置：small(对应五号字)，heiti(黑体)，labelsep=quad(图号和标题之间空一个中文字符)
 
 
@@ -123,7 +124,7 @@
 % 交叉引用
 \hypersetup{colorlinks=true,linkcolor=blue,citecolor=red} %超链接颜色
 \RequirePackage{tocloft} %目录设置
-  % 修改目录标题为带空格的“目 录”
+  % 修改目录标题为带空格的"目 录"
   \renewcommand{\contentsname}{目\hspace{1em}录}
   \renewcommand\cfttoctitlefont{\thispagestyle{fancy}\hfill\heiti\zihao{3}}
   \renewcommand\cftaftertoctitle{\hfill}
@@ -252,21 +253,7 @@
   \end{flushright}
   \newpage \normalsize \restoregeometry
 
-<<<<<<< HEAD
-
   \newpage \normalsize
-=======
-  % 可选独立标题页（默认关闭）
-  \if@showtitlepage
-    \thispagestyle{empty}
-    \vspace*{\fill}
-    \begin{center}
-      \zihao{-2}\@title \\ \@entitle \vskip 36pt \@author \\ \@enauthor
-    \end{center}
-    \vspace*{\fill}
-    \newpage \normalsize
-  \fi
->>>>>>> 95df24d7583700db5e7d5fa96f9f950a1fd34165
 }
 
 
@@ -285,7 +272,6 @@
 
 
 \renewenvironment{abstract}[1][\empty]{%
-<<<<<<< HEAD
   \gdef\GZU@zhkeywords{#1}% 将关键词存入全局宏，供结尾调用
   \clearpage
   \phantomsection\addcontentsline{toc}{section}{摘要}%
@@ -294,7 +280,7 @@
   \vspace*{\baselineskip}
   {\centering\heiti\zihao{-2}\@title\par}
   
-  % 2. “摘要”二字：黑体小三，居中，段前段后0.5行
+  % 2. "摘要"二字：黑体小三，居中，段前段后0.5行
   \vspace{0.5\baselineskip}
   {\centering\heiti\zihao{-3}\bfseries 摘\hspace{1em}要\par}
   \vspace{0.5\baselineskip}
@@ -335,32 +321,6 @@
   \clearpage
 }
 
-=======
-  \newcommand\GZU@keywords{\bfseries \paragraph{\zihao{-3}关键词：}#1 \mdseries}%
-  \newpage\phantomsection\addcontentsline{toc}{section}{摘要}%
-  \if@showtitlepage
-    \begin{center}\zihao{3}\textbf{摘要}\end{center}\par
-  \else
-    \begin{center}\zihao{-2}\vspace*{1pt}\textbf{\@title}\\ \vspace*{12pt}%
-    \zihao{3}\textbf{摘要}\end{center}\par
-  \fi
-  }{%
-  \GZU@keywords
-  }
-
-\newenvironment{enabstract}[1][\empty]{%
-  \newcommand\GZU@enkeywords{\bfseries \paragraph{\zihao{-3}Key words:}#1 \mdseries}%
-  \newpage\phantomsection\addcontentsline{toc}{section}{Abstract}%
-  \if@showtitlepage
-    \begin{center}\zihao{3}\zihao{3}\textbf{Abstract}\end{center}\par
-  \else
-    \begin{center}\zihao{-2}\vspace*{1pt}\textbf{\@entitle}\\ \vspace*{12pt}%
-    \zihao{3}\zihao{3}\textbf{Abstract}\end{center}\par
-  \fi
-  }{%
-  \GZU@enkeywords
-  }
->>>>>>> 95df24d7583700db5e7d5fa96f9f950a1fd34165
 
 \let\@oldbibliography=\bibliography
 \renewcommand\bibliography[1]{%
