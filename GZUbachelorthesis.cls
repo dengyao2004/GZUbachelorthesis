@@ -69,7 +69,7 @@
 \pagestyle{fancy}
   \fancyhf{}
   \lhead{\hspace{5ex}\includegraphics[height=1.22cm]{GZUlogo1.png}}
-  \chead{\zihao{-4}\heiti 贵州大学本科毕业论文（设计）}
+  \chead{\zihao{-4}\songti 贵州大学本科毕业论文（设计）}
   \rhead{\zihao{5}\songti 第 \thepage 页\hspace{5ex}}
 
 
@@ -262,7 +262,7 @@
   \pagestyle{fancy}
   \fancyhf{}
   \lhead{\hspace{5ex}\includegraphics[height=1.22cm]{GZUlogo1.png}}
-  \chead{\zihao{-4}\heiti 贵州大学本科毕业论文（设计）}
+  \chead{\zihao{-4}\songti 贵州大学本科毕业论文（设计）}
   \cfoot{\zihao{5}\songti 第 \thepage 页} % 仅此部分显示页脚
   \tableofcontents%
   \newpage
